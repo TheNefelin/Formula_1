@@ -1,0 +1,20 @@
+{{#> plantilla}}
+    <div class="race-header">
+        <a href="/carrera">{{idCircuito}}</a>
+        <img src={{flag}}>
+        <img src={{pista}}>
+        <h3>{{fecha}}</h3>
+        <h1>{{circuito}}</h1>
+    </div>
+    <div class="race-speedway">
+        {{#each pilotos }}
+            <div class="race">
+                <img style= "--i:{{@key}};" class="race-team" src={{team}}>
+                <img style= "--i:{{@key}};--x:0;" class="race-car" src={{car}}>
+            </div>
+        {{/each}}
+    </div>
+
+    <div class="race-resume"></div>
+
+{{/plantilla}}

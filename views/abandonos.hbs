@@ -1,0 +1,37 @@
+{{#> plantilla}}
+    
+        <div class="h1s">
+            <h1 class="h1Abandono h1s1">Abandonos</h1>
+            <h1 class="h1Abandono h1s2"> Fallecidos ✞</h1>
+        </div>
+
+        <div class="tabless tabless2">
+
+        <table class="tablaClasificacion tabla1">
+            <tr class="trTablaTop">
+                <th>Piloto</th>
+                <th>N° Abandonos</th>
+            </tr>
+
+            {{#each abandonos}}
+            <tr>
+                <th>{{piloto}}</th>
+                <th>{{cant}}</th>
+            </tr>
+            {{/each}}
+        </table>
+
+        <br><br>
+        <table class="tablaClasificacion tabla2">
+            <tr>
+                <th>Escuderia</th>
+                <th>Pilotos</th>
+            </tr>
+            {{#each fallecidos}}
+                    <tr>
+                        <th><img class="tablaClasificacion__teams" src={{team}}></th>
+                    <th>{{piloto}} ✞</th>
+            {{/each}}
+        </table>
+    </div>
+{{/plantilla}}

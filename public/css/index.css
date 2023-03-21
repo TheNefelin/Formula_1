@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+.margin0 {
+    margin: 0;
+}
+:root {
+    --clr-black: #000000c9;
+    --clr-white: #ffffff;   
+    --clr-white-act: #a7a5a5;
+    --clr-white-tras: #a7a6a633;
+
+    --font-Sans: 'Open Sans', sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: var(--clr-black);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-Sans);
+    height: 4rem;
+}
+.logo {
+    margin-left: 1rem;
+    height: 4rem;
+}
+.navbar-der, .navbar-izq {
+    display: flex;
+    color: var(--clr-white);
+    align-items: center;
+    gap: .6rem;
+    text-decoration: none;
+}
+.navbar-izq {
+    margin-right: 1rem;
+}
+.navbar-izq:hover {
+    color: var(--clr-white-act);
+}
+
+/* CUADRO CLASIFICACIONES CARRERA */
+
+.tabless {
+    width: 100%;
+    overflow-x: visible;
+}
+.tablaClasificacion {
+    justify-content: flex;
+    border: solid 1px var(--clr-black);
+    overflow-x: visible;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.tablaClasificacion__paises, .tablaClasificacion__teams {
+    max-height: 2.5rem;
+}
+.tablaClasificaciones__Nclas, .tablaClasificaciones__TPuntos {
+    background-color: var(--clr-white-tras);
+}
+
+.tablaClasificaciones__Nclas {
+    padding: .3rem;
+}
+
+/* cars ---------------------------------------------------------- */
+.race-header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgb(255, 165, 80);
+}
+
+.race-header img {
+    height: 10rem;
+}
+
+.race-speedway {
+    background-color: #ffffff;
+    height: 170vh;
+}
+
+.race {
+    position: relative;
+}
+
+.race-team {
+    position: absolute;
+    height: 3rem;
+    top: calc(60px + 3rem * var(--i));
+}
+
+.race-car {
+    position: absolute;
+    height: 5rem;
+    transform: rotate(-90deg);
+    top: calc(45px + 3rem * var(--i));
+    left: calc(8rem - 5rem * var(--x));
+    transition: 1s;
+    z-index: 1;
+}
+
+.race-resume {
+    background-image: url(../img/endcarrera.png);
+    position: absolute;
+    width: 55px;
+    height: 1000px;
+    top: 18rem;
+    left: 46rem;
+    z-index: 0;
+}
+/* calendario ---------------------------------------------------- */
+.calendario {
+    background-color: #181818;
+}
+
+.calendario-carrera {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 0.2rem;
+    gap: 1rem;
+}
+
+.calendario-carrera:hover {
+    background-color: #666666;
+}
+
+.calendario-carrera span {
+    min-width: 10rem;
+    color: yellow;
+}
+
+.calendario-carrera a {
+    min-width: 10rem;
+    text-decoration: none;
+    color: white;
+}
+
+.calendario-carrera p {
+    min-width: 10rem;
+    background-color: rosybrown;
+    color: white;
+    margin: 0;
+} 
+
+.calendario-carrera div {
+    color: white;
+}
+
+/* --------------------------------------------------------------- */
+/* --------------------------------------------------------------- */
+/* Abandonos --------------------------------------------------------------- */
+
+
+.h1Abandono {
+    text-align: center;
+    padding-top: 1rem;
+    justify-content: center;
+}
+.tabless2, .h1s {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+.tabla1, .h1s1 {
+    grid-column: 2/3;
+}
+.tabla2, .h1s2 {
+    grid-column: 4/5;
+}
+
+/* FOOTER */
+footer {
+    width: 100%;
+    background-color: var(--clr-black);
+    color: var(--clr-white);
+    text-align: center;
+    font-family: var(--font-Sans);
+}
+
+footer div {
+    padding: .5rem;
+}
+
+/* MQ */
+@media (max-width: 600px) {
+    .nombrelogo {
+        font-size: 1.4rem;
+    }
+    .logo {
+        height: 3rem;
+    }
+}
+@media (max-width: 500px) {
+    .nombrelogo {
+        font-size: 1.1rem;
+    }
+}
+@media (max-width: 400px) {
+    .nombrelogo {
+    font-size: 1rem;
+    }
+}
+@media (max-width: 300px) {
+    .nombrelogo {
+      font-size: 7px;
+    }
+}
+  @media (max-width: 200px) {
+    .nombrelogo {
+      font-size: 6px;
+    }
+}

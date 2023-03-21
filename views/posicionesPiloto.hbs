@@ -1,0 +1,31 @@
+{{#> plantilla}}
+<div class="wololo">
+    <div class="tabless">
+        <h1 class="h1posiciones">Tabla Clasificaciones Pilotos</h1>
+        <table class="tablaClasificacion">
+            <tr>
+                <th>Posicion</th>
+                <th>Escudo</th>
+                <th>Piloto</th>
+                <th>Total</th>
+                {{#each bandera.puntos}}
+                    <th><img class="tablaClasificacion__paises" src={{puntaje}}></th>
+                {{/each}}
+            </tr>
+            {{#each items}}
+                {{#if idPiloto}}
+                    <tr>
+                        <th class="tablaClasificaciones__Nclas">{{@key}}</th>
+                        <th><img class="tablaClasificacion__teams" src={{imgEscudo}}></th>
+                        <th>{{nomPiloto}}</th>
+                        <th class="tablaClasificaciones__TPuntos">{{total}}</th>
+                        {{#each puntos}}
+                            <th>{{puntaje}}</th>
+                        {{/each}}
+                    </tr>
+                {{/if}}
+            {{/each}}
+        </table>
+    </div>
+</div>
+{{/plantilla}}
