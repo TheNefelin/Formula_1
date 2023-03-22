@@ -12,7 +12,7 @@ if(cars) {
 
                     if (!pos[0].isAlive) {
                         el.src = pos[0].auto;
-                    };
+                    }
                 });
             }, 600 * lapIndex);
         })

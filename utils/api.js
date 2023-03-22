@@ -114,7 +114,7 @@ async function simulacion(idCircuito, pilotosVivos) {
     // const pilotosVivos = await getPilotosActivos();
     const arrSim = [];
     const meta = 8;
-    const lap = 20;
+    const lap = 7;
     let lugar = 0;
 
     for (let i = 0; i < lap; i++) {

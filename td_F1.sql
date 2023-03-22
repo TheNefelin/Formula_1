@@ -389,7 +389,7 @@ BEGIN
 	WHERE idCircuito = 1
 
 	SELECT 
-		row_number() OVER (ORDER BY nombre) n,
+		row_number() OVER (ORDER BY puntos) n,
 		* 
 	FROM @Tabla
 
@@ -400,11 +400,13 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	DECLARE @Table AS TABLE (bandera VARCHAR(255), nombre VARCHAR(50), puntaje INT)
+
+	INSERT INTO @Table (bandera, nombre, puntaje)
 	SELECT 
-		row_number() OVER (ORDER BY a.Puntaje) n,
 		a.bandera,
 		a.nombre,
-		SUM(c.puntaje) AS Puntaje
+		SUM(c.puntaje) AS puntaje
 	FROM F1_escuderia a 
 		INNER JOIN F1_pilotos b ON a.id = b.idEscuderia
 		INNER JOIN F1_carreras c ON b.id = c.idPiloto
@@ -413,6 +415,11 @@ BEGIN
 		a.nombre
 	ORDER BY
 		SUM(c.puntaje) DESC
+		
+	SELECT 
+		row_number() OVER (ORDER BY puntaje DESC) n,
+		* 
+	FROM @Table
 
 END
 

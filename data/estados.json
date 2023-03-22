@@ -10,14 +10,14 @@
         {
             "id": 1,
             "situacion": "Accidente sin muerte",
-            "prob": 2,
+            "prob": 1,
             "puntuacion": 0,
             "vivo": true
         },
         {
             "id": 2,
             "situacion": "Abandono por problemas tecnicos",
-            "prob": 3,
+            "prob": 1,
             "puntuacion": 0,
             "vivo": true
         },
@@ -31,7 +31,7 @@
         {
             "id": 4,
             "situacion": "Avance regular",
-            "prob": 44,
+            "prob": 47,
             "puntuacion": 2,
             "vivo": true
         },
