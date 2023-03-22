@@ -388,16 +388,20 @@ BEGIN
 	FROM @Tabla a INNER JOIN F1_carreras b ON a.id = b.idPiloto
 	WHERE idCircuito = 1
 
-	SELECT * FROM @Tabla
+	SELECT 
+		row_number() OVER (ORDER BY nombre) n,
+		* 
+	FROM @Tabla
 
 END
 	
-CREATE PROCEDURE sp_tabla_escuderia
+ALTER PROCEDURE sp_tabla_escuderia
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	SELECT 
+		row_number() OVER (ORDER BY a.Puntaje) n,
 		a.bandera,
 		a.nombre,
 		SUM(c.puntaje) AS Puntaje
@@ -426,7 +430,7 @@ BEGIN
 		INNER JOIN F1_pilotos b ON a.id = b.idEscuderia
 		INNER JOIN F1_carreras c ON b.id = c.idPiloto
 	WHERE 
-		motivo <> 'Accidente con muerte' AND motivo <> ''
+		LOWER(motivo) <> 'accidente con muerte' AND motivo <> ''
 	GROUP BY
 		a.bandera,
 		b.nombre,
@@ -452,7 +456,7 @@ BEGIN
 		INNER JOIN F1_pilotos b ON a.id = b.idEscuderia
 		INNER JOIN F1_carreras c ON b.id = c.idPiloto
 	WHERE 
-		motivo = 'Accidente con muerte' AND motivo <> ''
+		LOWER(motivo) = 'accidente con muerte'
 	GROUP BY
 		a.bandera,
 		b.nombre,
