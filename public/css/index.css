@@ -55,6 +55,7 @@
     width: 100%;
     font-size: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem;
 }
 .tablaClasificacion__paises, .tablaClasificacion__teams {
     max-height: 2.5rem;
