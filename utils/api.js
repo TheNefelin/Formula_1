@@ -67,30 +67,27 @@ export async function resetApi() {
     });
 };
 
+// tabla de posiciones
+export async function tablaPosiciones() {
+    const data = await fetch("https://slifer.bsite.net/f1-reportes/tabla-posiciones")
+    return await data.json();
+}
 
 export async function iniciarCarrera(idCircuito) {
-    const circuito = await getCircuitosById(idCircuito);
+    let circuito = await getCircuitosById(idCircuito);
+    circuito = circuito[0];
 
-    if (circuito[0].isActive) {
+    if (circuito.isActive) {
         const pilotosVivos = await getPilotosActivos();
 
-        return {isActive: true, circuito}
+        simulacion(idCircuito)
+
+        return {isActive: true, circuito, pilotosVivos}
     } else {
-        const circuitos = await getCircuitos()
+        let circuitos = await getCircuitos()
+
         return {isActive: false, circuitos};
-    }
-
-    // if (circuito.isActive) {
-    //     const leerPilotos = await leerArchivoPilotos();
-    //     const pilotos = leerPilotos.piloto.filter(e => e.isAlive == true);
-    //     const carrera = {... circuito, pilotos};
-
-    //     await crearSimulacion(circuito, pilotos);
-
-    //     return {... circuito, pilotos};
-    // } else {
-    //     return {isActive: false, carrera: leerCircuito};
-    // };
+    };
 };
 
 async function simulacion(idCircuito) {
@@ -167,14 +164,13 @@ async function simulacion(idCircuito) {
             motivo: e.motivo
         }
 
-        promesas.push(setCarrera(obj).then(() => console.log("ok")));
+        promesas.push(setCarrera(obj).then(() => {}));
     });
 
     // guarda como termino la carrera
-    await Promise.all(promesas).then(() => console.log("OK Promesa"));
-
+    await Promise.all(promesas).then(() => {});
+    // bloquea el Circuito
     await updateCircuitosById(idCircuito);
-
     // crea la simulacion
     await crearSimulacionPublic(arrSim);
 };

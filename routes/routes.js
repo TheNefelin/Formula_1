@@ -5,11 +5,7 @@ import * as api from "../utils/api.js";
 const myRouter = Router();
 
 myRouter.get("/", (req, res) => {
-    func.tablaCarrera().then(data => {
-        res.render("main", data);
-    }).catch(() => {
-        res.render("error");
-    });
+    res.render("main");
 });
 
 myRouter.get("/calendario", (req, res) => {
@@ -26,37 +22,35 @@ myRouter.get("/carrera/:idCircuito", (req, res) => {
     if (!isNaN(idCircuito) && idCircuito > 0 && idCircuito < 24) {
         api.iniciarCarrera(idCircuito).then(data => {
             if (data.isActive) {
-                console.log(data.circuito[0])
-                res.render("carrera", data.circuito[0]);
+                res.render("carrera", data);
             } else {
                 res.render("calendario", {circuito: data});
-            }
+            };
+        }).catch(() => {
+            res.render("error");
         });
     } else {
         res.render("error");
-    }
-
-    // if (!isNaN(idCircuito) && idCircuito > 0 && idCircuito < 24) {
-    //     func.prepararCarrera(parseInt(idCircuito)).then(carrera => {
-    //         if (carrera.isActive) {
-    //             func.tablaResumenCarreraById(idCircuito).then(resumen => {
-    //                 console.log(resumen)
-    //             })
-    //             res.render("carrera", carrera);
-    //         } else {
-    //             res.render("calendario", carrera.carrera);
-    //         }           
-    //     });
-    // } else {
-    //     res.render("error");
-    // };
+    };
 });
 
 myRouter.get("/posicionespiloto", (req, res) => {
-    func.tablaPosiciones().then(data => {
-      res.render("posicionesPiloto", {bandera: data.tablaPosiciones[0], items: data.tablaPosiciones});
+    api.tablaPosiciones().then(data => {
+        api.getCircuitos().then(banderas => {
+            res.render("posicionesPiloto", {data, banderas});
+            console.log(banderas)
+        }).catch(() => {
+            res.render("error");
+        });
+    }).catch(() => {
+        res.render("error");
     });
+
+    // func.tablaPosiciones().then(data => {
+    //   res.render("posicionesPiloto", {bandera: data.tablaPosiciones[0], items: data.tablaPosiciones});
+    // });
 });
+
 //ADAPTAR
 myRouter.get("/posicionesescuderia", (req, res) => {
     func.tablaEscuderia().then(() => {

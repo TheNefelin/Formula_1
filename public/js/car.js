@@ -1,19 +1,16 @@
 const cars = document.querySelectorAll(".race-speedway .race-car");
 
-if(cars) {  
+if(cars) { 
     fetch("/js/simulacion.json")
     .then(data => data.json())
     .then(dt => {
-        console.log(dt)
-        dt.forEach((e, i) => {
-   
-            cars.forEach((car, index) => {
-                setTimeout(() => {
-                    const pos = e.filter(s => s.id == index + 1);
-                    car.style = `--i:${pos[0].id - 1};--x:${-pos[0].dist};`
-                }, 500 * i);
-            });
-        });
+        dt.forEach((lap, lapIndex) => {
+            setTimeout(() => {
+                cars.forEach((el, elIndex) => {
+                    const pos = lap.pilotos.filter(s => s.idPiloto == elIndex + 1);
+                    el.style = `--i:${pos[0].idPiloto - 1};--x:${-pos[0].distancia};`
+                });
+            }, 600 * lapIndex);
+        })
     });
 };
-

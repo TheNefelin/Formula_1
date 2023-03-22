@@ -8,22 +8,40 @@
                 <th>Escudo</th>
                 <th>Piloto</th>
                 <th>Total</th>
-                {{#each bandera.puntos}}
-                    <th><img class="tablaClasificacion__paises" src={{puntaje}}></th>
+                {{#each banderas}}
+                    <th><img class="tablaClasificacion__paises" src={{bandera}}></th>
                 {{/each}}
             </tr>
-            {{#each items}}
-                {{#if idPiloto}}
-                    <tr>
-                        <th class="tablaClasificaciones__Nclas">{{@key}}</th>
-                        <th><img class="tablaClasificacion__teams" src={{imgEscudo}}></th>
-                        <th>{{nomPiloto}}</th>
-                        <th class="tablaClasificaciones__TPuntos">{{total}}</th>
-                        {{#each puntos}}
-                            <th>{{puntaje}}</th>
-                        {{/each}}
-                    </tr>
-                {{/if}}
+            {{#each data}}
+                <tr>
+                    <th class="tablaClasificaciones__Nclas">{{@key}}</th>
+                    <th><img class="tablaClasificacion__teams" src="{{escudo}}"></th>
+                    <th>{{nombre}}</th>
+                    <th class="tablaClasificaciones__TPuntos">{{puntos}}</th>
+                    <th>{{c01}}</th>
+                    <th>{{c02}}</th>
+                    <th>{{c03}}</th>
+                    <th>{{c04}}</th>
+                    <th>{{c05}}</th>
+                    <th>{{c06}}</th>
+                    <th>{{c07}}</th>
+                    <th>{{c08}}</th>
+                    <th>{{c09}}</th>
+                    <th>{{c10}}</th>
+                    <th>{{c11}}</th>
+                    <th>{{c12}}</th>
+                    <th>{{c13}}</th>
+                    <th>{{c14}}</th>
+                    <th>{{c15}}</th>
+                    <th>{{c16}}</th>
+                    <th>{{c17}}</th>
+                    <th>{{c18}}</th>
+                    <th>{{c19}}</th>
+                    <th>{{c20}}</th>
+                    <th>{{c21}}</th>
+                    <th>{{c22}}</th>
+                    <th>{{c23}}</th>
+                </tr>
             {{/each}}
         </table>
     </div>
