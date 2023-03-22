@@ -188,8 +188,6 @@ async function simulacion(idCircuito, pilotosVivos) {
 
     // guarda como termino la carrera
     await Promise.all(promesas).then(() => {});
-    // bloquea el Circuito
-    await updateCircuitosById(idCircuito);
     // crea la simulacion
     await crearSimulacionPublic(arrSim);
 };
