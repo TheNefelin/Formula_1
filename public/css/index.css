@@ -118,7 +118,9 @@
 .calendario {
     background-color: #181818;
 }
-
+.circlepaises {
+    height: 4rem;
+}
 .calendario-carrera {
     display: flex;
     text-align: center;
