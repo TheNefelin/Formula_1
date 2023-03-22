@@ -1,41 +1,39 @@
 {{#> plantilla}}
     
-        <div class="h1s">
-            <h1 class="h1Abandono h1s1">Abandonos</h1>
-            <h1 class="h1Abandono h1s2"> Fallecidos ✞</h1>
-        </div>
+    <h1 class="h1Abandono h1s1">Abandonos</h1>
 
-        <div class="tabless tabless2">
+    <div class="tabless tabless2">
 
-        <table class="tablaClasificacion tabla1">
-            <tr class="trTablaTop">
-                <th>Escuderia</th>
-                <th>Piloto</th>
-                <th>N° Abandonos</th>
-                <th>Motivo</th>
-            </tr>
-            {{#each abandonos}}
-                <tr>
-                    <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
-                    <th>{{nombre}}</th>
-                    <th>{{Cant}}</th>
-                    <th>{{motivo}}</th>
-                </tr>
-            {{/each}}
-        </table>
-
-        <br><br>
-        <table class="tablaClasificacion tabla2">
+    <table class="tablaClasificacion tabla1">
+        <tr class="trTablaTop">
+            <th>Escuderia</th>
+            <th>Piloto</th>
+            <th>N° Abandonos</th>
+            <th>Motivo</th>
+        </tr>
+        {{#each abandonos}}
             <tr>
-                <th>Escuderia</th>
-                <th>Pilotos</th>
+                <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
+                <th>{{nombre}}</th>
+                <th>{{Cant}}</th>
+                <th>{{motivo}}</th>
             </tr>
-            {{#each fallecidos}}
-                <tr>
-                    <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
-                    <th>{{nombre}} ✞</th>
-                </tr>
-            {{/each}}
-        </table>
-    </div>
+        {{/each}}
+    </table>
+
+    <br>
+    <h1 class="h1Abandono h1s2"> Fallecidos ✞</h1>
+    <table class="tablaClasificacion tabla2">
+        <tr>
+            <th>Escuderia</th>
+            <th>Pilotos</th>
+        </tr>
+        {{#each fallecidos}}
+            <tr>
+                <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
+                <th>{{nombre}} ✞</th>
+            </tr>
+        {{/each}}
+    </table>
+</div>
 {{/plantilla}}
