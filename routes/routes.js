@@ -38,44 +38,39 @@ myRouter.get("/posicionespiloto", (req, res) => {
     api.tablaPosiciones().then(data => {
         api.getCircuitos().then(banderas => {
             res.render("posicionesPiloto", {data, banderas});
-            console.log(banderas)
         }).catch(() => {
             res.render("error");
         });
     }).catch(() => {
         res.render("error");
     });
-
-    // func.tablaPosiciones().then(data => {
-    //   res.render("posicionesPiloto", {bandera: data.tablaPosiciones[0], items: data.tablaPosiciones});
-    // });
 });
 
-//ADAPTAR
 myRouter.get("/posicionesescuderia", (req, res) => {
-    func.tablaEscuderia().then(() => {
-        
-    });
-
-    func.leerArchivoEquipo().then(data => {
-        res.render("posicionesEscuderia", {escudo: data.equipos});
+    api.tablaEscuderias().then(data => {
+        res.render("posicionesEscuderia", {escuderia: data});
+    }).catch(() => {
+        res.render("error");
     });
 });
 
 myRouter.get("/abandonos", (req, res) => {
-    func.leerArchivoPilotos().then(data => {
-        const fallecidos = data.piloto.filter(e => e.isAlive == false);
-        // console.log(fallecidos)
-        func.tablaAbandonos().then(abandonos => {
-        // console.log(abandonos);
+    api.tablaAbandonos().then(abandonos => {
+        api.tablaFallecidos().then(fallecidos => {
             res.render("abandonos", {fallecidos, abandonos});
+        }).catch(() => {
+            res.render("error");
         });
-    })
+    }).catch(() => {
+        res.render("error");
+    });
 });
 
 myRouter.get("/reset", (req, res) => {
     api.resetApi().then(() => {
-        console.log("Reseteado")
+        res.render("main");
+    }).catch(() => {
+        res.render("error");
     });
 });
 

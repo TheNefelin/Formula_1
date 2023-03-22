@@ -71,7 +71,25 @@ export async function resetApi() {
 export async function tablaPosiciones() {
     const data = await fetch("https://slifer.bsite.net/f1-reportes/tabla-posiciones")
     return await data.json();
-}
+};
+
+// tabla de escuderias
+export async function tablaEscuderias() {
+    const data = await fetch("https://slifer.bsite.net/f1-reportes/tabla-escuderias")
+    return await data.json();
+};
+
+// tabla de abandonos
+export async function tablaAbandonos() {
+    const data = await fetch("https://slifer.bsite.net/f1-reportes/tabla-abandonos")
+    return await data.json();
+};
+
+// tabla de fallecidos
+export async function tablaFallecidos() {
+    const data = await fetch("https://slifer.bsite.net/f1-reportes/tabla-fallecidos")
+    return await data.json();
+};
 
 export async function iniciarCarrera(idCircuito) {
     let circuito = await getCircuitosById(idCircuito);
@@ -160,7 +178,7 @@ async function simulacion(idCircuito) {
             puntaje: e.puntos,
             lugar: e.lugar,
             carreraTerminada: true,
-            incidente: true,
+            incidente: false,
             motivo: e.motivo
         }
 

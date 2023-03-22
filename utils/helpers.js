@@ -10,3 +10,6 @@ hbs.registerHelper("CLP", (num) => {
     return formatoCL.format(num);
 });
 
+hbs.registerHelper("addUno", (num) => {
+    return num + 1;
+})

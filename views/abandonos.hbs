@@ -9,15 +9,16 @@
 
         <table class="tablaClasificacion tabla1">
             <tr class="trTablaTop">
+                <th>Escuderia</th>
                 <th>Piloto</th>
                 <th>N° Abandonos</th>
             </tr>
-
             {{#each abandonos}}
-            <tr>
-                <th>{{piloto}}</th>
-                <th>{{cant}}</th>
-            </tr>
+                <tr>
+                    <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
+                    <th>{{nombre}}</th>
+                    <th>{{Cant}}</th>
+                </tr>
             {{/each}}
         </table>
 
@@ -28,9 +29,10 @@
                 <th>Pilotos</th>
             </tr>
             {{#each fallecidos}}
-                    <tr>
-                        <th><img class="tablaClasificacion__teams" src={{team}}></th>
-                    <th>{{piloto}} ✞</th>
+                <tr>
+                    <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
+                    <th>{{nombre}} ✞</th>
+                </tr>
             {{/each}}
         </table>
     </div>
