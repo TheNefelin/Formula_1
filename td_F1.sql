@@ -389,7 +389,7 @@ BEGIN
 	WHERE idCircuito = 1
 
 	SELECT 
-		row_number() OVER (ORDER BY puntos) n,
+		row_number() OVER (ORDER BY puntos DESC) n,
 		* 
 	FROM @Tabla
 
