@@ -12,12 +12,14 @@
                 <th>Escuderia</th>
                 <th>Piloto</th>
                 <th>N° Abandonos</th>
+                <th>Motivo</th>
             </tr>
             {{#each abandonos}}
                 <tr>
                     <th><img class="tablaClasificacion__teams" src={{bandera}}></th>
                     <th>{{nombre}}</th>
                     <th>{{Cant}}</th>
+                    <th>{{motivo}}</th>
                 </tr>
             {{/each}}
         </table>

@@ -98,7 +98,7 @@ export async function iniciarCarrera(idCircuito) {
     if (circuito.isActive) {
         const pilotosVivos = await getPilotosActivos();
 
-        simulacion(idCircuito)
+        simulacion(idCircuito, pilotosVivos)
 
         return {isActive: true, circuito, pilotosVivos}
     } else {
@@ -108,10 +108,10 @@ export async function iniciarCarrera(idCircuito) {
     };
 };
 
-async function simulacion(idCircuito) {
+async function simulacion(idCircuito, pilotosVivos) {
     const puntajes = await func.leerArchivoPuntajes();
     const posibilidades = await func.leerArchivoEstado();
-    const pilotosVivos = await getPilotosActivos();
+    // const pilotosVivos = await getPilotosActivos();
     const arrSim = [];
     const meta = 8;
     const lap = 20;
@@ -139,6 +139,7 @@ async function simulacion(idCircuito) {
                         lugar += 1;
                         pv.lugar = lugar;
                         pv.carreraTerminada = true;
+                        pv.incidente = false;
                         pv.distancia = meta
                         if (lugar <= 10) {
                             const puntos = puntajes.puntaje.find(e => e.posicion == lugar)
@@ -177,8 +178,8 @@ async function simulacion(idCircuito) {
             distancia: e.distancia,
             puntaje: e.puntos,
             lugar: e.lugar,
-            carreraTerminada: true,
-            incidente: false,
+            carreraTerminada: e.carreraTerminada,
+            incidente: e.incidente,
             motivo: e.motivo
         }
 
