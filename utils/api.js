@@ -44,6 +44,19 @@ export async function updatePilotosById(id) {
         body: JSON.stringify(id)
     });
 };
+// ingresa ultimo lap de la carrera
+async function setCarrera(obj) {
+    const res = await fetch("https://slifer.bsite.net/f1-carrera", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(obj)
+    });
+    return res
+};
+
 // reinicia todas las carreras
 export async function resetApi() {
     await fetch("https://slifer.bsite.net/f1-reset", {
@@ -54,10 +67,35 @@ export async function resetApi() {
     });
 };
 
-export async function simulacion(idCircuito) {
+
+export async function iniciarCarrera(idCircuito) {
+    const circuito = await getCircuitosById(idCircuito);
+
+    if (circuito[0].isActive) {
+        const pilotosVivos = await getPilotosActivos();
+
+        return {isActive: true, circuito}
+    } else {
+        const circuitos = await getCircuitos()
+        return {isActive: false, circuitos};
+    }
+
+    // if (circuito.isActive) {
+    //     const leerPilotos = await leerArchivoPilotos();
+    //     const pilotos = leerPilotos.piloto.filter(e => e.isAlive == true);
+    //     const carrera = {... circuito, pilotos};
+
+    //     await crearSimulacion(circuito, pilotos);
+
+    //     return {... circuito, pilotos};
+    // } else {
+    //     return {isActive: false, carrera: leerCircuito};
+    // };
+};
+
+async function simulacion(idCircuito) {
     const puntajes = await func.leerArchivoPuntajes();
     const posibilidades = await func.leerArchivoEstado();
-    const circuito = await getCircuitosById(idCircuito);
     const pilotosVivos = await getPilotosActivos();
     const arrSim = [];
     const meta = 8;
@@ -114,14 +152,35 @@ export async function simulacion(idCircuito) {
         })
     }
 
+    const lastLap = arrSim[arrSim.length-1]
+    const promesas = [];
 
-    console.log(arrSim[arrSim.length-1]);
+    lastLap.pilotos.forEach(e => {
+        const obj = {
+            idCircuito: idCircuito,
+            idPiloto: e.idPiloto,
+            distancia: e.distancia,
+            puntaje: e.puntos,
+            lugar: e.lugar,
+            carreraTerminada: true,
+            incidente: true,
+            motivo: e.motivo
+        }
 
+        promesas.push(setCarrera(obj).then(() => console.log("ok")));
+    });
+
+    // guarda como termino la carrera
+    await Promise.all(promesas).then(() => console.log("OK Promesa"));
+
+    await updateCircuitosById(idCircuito);
+
+    // crea la simulacion
     await crearSimulacionPublic(arrSim);
 };
 
-async function crearSimulacionPublic(data) {
-    await fs.promises.writeFile('./public/js/simulacion.json', JSON.stringify(data), err => {
+async function crearSimulacionPublic(arrSim) {
+    await fs.promises.writeFile('./public/js/simulacion.json', JSON.stringify(arrSim), err => {
         if (err) throw err;
     });
 };

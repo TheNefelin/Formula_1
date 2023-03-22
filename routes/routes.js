@@ -5,11 +5,51 @@ import * as api from "../utils/api.js";
 const myRouter = Router();
 
 myRouter.get("/", (req, res) => {
-    api.simulacion(1).then(data => data)
-
     func.tablaCarrera().then(data => {
         res.render("main", data);
+    }).catch(() => {
+        res.render("error");
     });
+});
+
+myRouter.get("/calendario", (req, res) => {
+    api.getCircuitos().then(data => {
+        res.render("calendario", {circuito: data});
+    }).catch(() => {
+        res.render("error");
+    });
+});
+
+myRouter.get("/carrera/:idCircuito", (req, res) => {
+    const idCircuito = req.params.idCircuito;
+
+    if (!isNaN(idCircuito) && idCircuito > 0 && idCircuito < 24) {
+        api.iniciarCarrera(idCircuito).then(data => {
+            if (data.isActive) {
+                console.log(data.circuito[0])
+                res.render("carrera", data.circuito[0]);
+            } else {
+                res.render("calendario", {circuito: data});
+            }
+        });
+    } else {
+        res.render("error");
+    }
+
+    // if (!isNaN(idCircuito) && idCircuito > 0 && idCircuito < 24) {
+    //     func.prepararCarrera(parseInt(idCircuito)).then(carrera => {
+    //         if (carrera.isActive) {
+    //             func.tablaResumenCarreraById(idCircuito).then(resumen => {
+    //                 console.log(resumen)
+    //             })
+    //             res.render("carrera", carrera);
+    //         } else {
+    //             res.render("calendario", carrera.carrera);
+    //         }           
+    //     });
+    // } else {
+    //     res.render("error");
+    // };
 });
 
 myRouter.get("/posicionespiloto", (req, res) => {
@@ -39,34 +79,9 @@ myRouter.get("/abandonos", (req, res) => {
     })
 });
 
-myRouter.get("/calendario", (req, res) => {
-    func.leerArchivoCircuitos().then(data => {
-        res.render("calendario", data);
-    });
-});
-
-myRouter.get("/carrera/:idCircuito", (req, res) => {
-    const idCircuito = req.params.idCircuito;
-
-    if (!isNaN(idCircuito) && idCircuito > 0 && idCircuito < 24) {
-        func.prepararCarrera(parseInt(idCircuito)).then(carrera => {
-            if (carrera.isActive) {
-                func.tablaResumenCarreraById(idCircuito).then(resumen => {
-                    console.log(resumen)
-                })
-                res.render("carrera", carrera);
-            } else {
-                res.render("calendario", carrera.carrera);
-            }           
-        });
-    } else {
-        res.render("error");
-    };
-});
-
 myRouter.get("/reset", (req, res) => {
-    func.resetFile().then(() =>  {
-        res.render("reset");
+    api.resetApi().then(() => {
+        console.log("Reseteado")
     });
 });
 

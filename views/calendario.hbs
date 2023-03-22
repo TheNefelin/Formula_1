@@ -1,4 +1,4 @@
-{{#> plantilla}}
+{{!-- {{#> plantilla}}
     <div class="calendario">
         {{#each circuito }}
             <div class="calendario-carrera">
@@ -10,6 +10,22 @@
                 {{/if}}
                 <p>{{fecha}}</p>
                 <div>{{circuito}}</div>
+            </div>
+        {{/each}}
+    </div>
+{{/plantilla}} --}}
+{{#> plantilla}}
+    <div class="calendario">
+        {{#each circuito }}
+            <div class="calendario-carrera">
+                <img class="paises" src={{bandera}}>
+                {{#if isActive}}
+                    <a href="/carrera/{{id}}">Ver Carrera</a>
+                {{else}}
+                    <span>Carrera Finalizada</span>
+                {{/if}}
+                <p>{{fecha}}</p>
+                <div>{{nombre}}</div>
             </div>
         {{/each}}
     </div>
